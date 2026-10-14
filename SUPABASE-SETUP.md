@@ -1,4 +1,5 @@
 # Autenticacao e dados na nuvem
+O frontend foi conectado ao projeto existente `playbackflix` (`egqwgyhpcdejxnwuweti`). O schema próprio Entrelinhas, RLS, bucket privado e redirect do GitHub Pages já foram aplicados. O projeto é compartilhado com PlaybackFlix; mantenha as configurações globais existentes que não sejam necessárias ao Entrelinhas.
 
 O prototipo usa Supabase Auth para contas reais, Supabase Postgres com RLS para os dados e um bucket privado para arquivos. O `anonKey` e uma chave publica do cliente; nunca coloque uma `service_role` key neste site.
 
@@ -15,11 +16,8 @@ window.SUPABASE_CONFIG = {
 };
 ```
 
-4. Em Authentication > URL Configuration, use como Site URL:
-   `https://helicleiton.github.io/entrelinhas-gestao-cultural/`
-5. Em Authentication > Providers, habilite Google. Crie um OAuth Client do tipo Web no Google Cloud Console e cadastre como Authorized redirect URI a callback mostrada na tela do provider Google do Supabase (normalmente `https://SEU-PROJETO.supabase.co/auth/v1/callback`). Configure o Client ID e Client Secret somente no painel do Supabase.
-6. Em Supabase > Authentication > URL Configuration > Redirect URLs, adicione:
-   `https://helicleiton.github.io/entrelinhas-gestao-cultural/`
-7. Publique `supabase-config.js` no GitHub. A URL e a chave anon/publishable podem ser públicas; a segurança dos dados e garantida pelas políticas RLS, não por esconder essa chave.
+4. O redirect `https://helicleiton.github.io/entrelinhas-gestao-cultural/` já foi adicionado à allowlist. O Site URL global continua `https://playbackflix.com.br` para não alterar o app que compartilha este projeto.
+5. Para ativar Google: crie um OAuth Client do tipo Web no Google Cloud Console. Cadastre como Authorized redirect URI `https://egqwgyhpcdejxnwuweti.supabase.co/auth/v1/callback`. No provider Google do Supabase, insira Client ID e Client Secret diretamente no painel; nunca os coloque neste repositório ou no chat.
+6. Depois de salvar o provider Google, publique as alterações locais. A chave anon/publishable do `supabase-config.js` é pública; a segurança dos dados é garantida pelas políticas RLS, nunca por esconder essa chave.
 
-O login por e-mail usa confirmação de endereço conforme a configuração de Authentication do projeto. Até configurar o Supabase, o botão de demonstração continua disponível e o cadastro real informa que falta conectar o serviço.
+O cadastro por e-mail está habilitado no projeto. A confirmação de endereço permanece desativada conforme a configuração compartilhada atual. O login Google ainda requer o OAuth Client do Google Cloud.
